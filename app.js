@@ -1,13 +1,30 @@
 'use strict';
 
+// Model
+var account = require('./models/account.js');
+
 // Controller
-var account = require('./controllers/accountCtrl.js');
+var accountCtrl = require('./controllers/accountCtrl.js');
 
-account.create({
-  name: 'Github',
-  username: 'philippschulte',
-  password: 'thisIsMySecret'
-});
+// Command
+var command = account._[0];
 
-var GitHub = account.read('Github');
-console.log(GitHub);
+if (command === 'create') {
+  var newAccount = accountCtrl.create({
+    name: account.name,
+    username: account.username,
+    password: account.password
+  });
+
+  console.log('New account created!');
+  console.log(newAccount);
+} else if (command === 'get') {
+  var fetchedAccount = accountCtrl.read(account.name);
+
+  if (typeof fetchedAccount === 'undefined') {
+    console.log('Account not found!');
+  } else {
+    console.log('Account found!');
+    console.log(fetchedAccount);
+  }
+}
