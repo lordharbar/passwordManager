@@ -1,0 +1,26 @@
+{
+  "name": "password-manager",
+  "version": "1.0.0",
+  "description": "Simple node.js app to save passwords locally",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/philippschulte/passwordManager.git"
+  },
+  "keywords": [
+    "passwords"
+  ],
+  "author": "Philipp Schulte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/philippschulte/passwordManager/issues"
+  },
+  "homepage": "https://github.com/philippschulte/passwordManager#readme",
+  "dependencies": {
+    "node-persist": "0.0.11"
+  }
+}
