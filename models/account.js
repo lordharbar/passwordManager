@@ -22,6 +22,12 @@ yargs.command('create', 'Create a new account', function(yargs) {
 				alias: 'p',
 				describe: 'Account password',
 				type: 'string'
+			},
+			masterPassword: {
+				demand: true,
+				alias: 'm',
+				describe: 'Master password',
+				type: 'string'
 			}
 		}).help('help');
 	})
@@ -31,6 +37,12 @@ yargs.command('create', 'Create a new account', function(yargs) {
 				demand: true,
 				alias: 'n',
 				describe: 'Account name (eg: Google, Github)',
+				type: 'string'
+			},
+			masterPassword: {
+				demand: true,
+				alias: 'm',
+				describe: 'Master password',
 				type: 'string'
 			}
 		}).help('help');

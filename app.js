@@ -14,12 +14,12 @@ if (command === 'create') {
     name: account.name,
     username: account.username,
     password: account.password
-  });
+  }, account.masterPassword);
 
   console.log('New account created!');
   console.log(newAccount);
 } else if (command === 'get') {
-  var fetchedAccount = accountCtrl.read(account.name);
+  var fetchedAccount = accountCtrl.read(account.name, account.masterPassword);
 
   if (typeof fetchedAccount === 'undefined') {
     console.log('Account not found!');

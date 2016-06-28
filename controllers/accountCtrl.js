@@ -1,28 +1,25 @@
 'use strict';
 
-// Dependencies
-var storage = require('node-persist');
-
-// Create instance of storage
-storage.initSync();
+// Controller
+var storageCtrl = require('./storageCtrl.js');
 
 // Account example
 // account.name = Github
 // account.username = philippschulte
 // account.password = thisIsMySecret
 
-function create(account) {
-	var accounts = storage.getItemSync('accounts') || [];
+function create(account, masterPassword) {
+	var accounts = storageCtrl.get(masterPassword);
 
 	accounts.push(account);
 
-  storage.setItemSync('accounts', accounts);
+	storageCtrl.set(accounts, masterPassword);
 
 	return account;
 }
 
-function read(accountName) {
-  var accounts = storage.getItemSync('accounts') || [];
+function read(accountName, masterPassword) {
+	var accounts = storageCtrl.get(masterPassword);
   var matchedAccount = {};
 
 	accounts.forEach(function(account) {
