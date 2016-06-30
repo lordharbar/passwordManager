@@ -31,7 +31,7 @@ yargs.command('create', 'Create a new account', function(yargs) {
 			}
 		}).help('help');
 	})
-	.command('get', 'Get an existing account', function(yargs) {
+	.command('read', 'Read an existing account', function(yargs) {
 		return yargs.options({
 			name: {
 				demand: true,

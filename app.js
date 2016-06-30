@@ -27,11 +27,11 @@ switch (command) {
     }
 
     break;
-  case 'get':
+  case 'read':
     try {
       var fetchedAccount = accountCtrl.read(account.name, account.masterPassword);
 
-      if (typeof fetchedAccount === 'null') {
+      if (fetchedAccount === null) {
         utils.error('Account not found!');
       } else {
         utils.account(fetchedAccount);
