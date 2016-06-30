@@ -31,7 +31,26 @@ function read(accountName, masterPassword) {
 	return matchedAccount;
 }
 
+function update(accountName, accountUsername, accountPassword, masterPassword) {
+	var accounts = storageCtrl.get(masterPassword);
+	var updatedAccount = null;
+
+	accounts.forEach(function(account) {
+		if (account.name === accountName) {
+			account.username = accountUsername;
+			account.password = accountPassword;
+
+			storageCtrl.set(accounts, masterPassword);
+
+			updatedAccount = account;
+		}
+	});
+
+	return updatedAccount;
+}
+
 module.exports = {
-  create: create,
-  read: read
+	create: create,
+	read: read,
+	update: update
 };

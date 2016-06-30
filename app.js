@@ -41,6 +41,20 @@ switch (command) {
     }
 
     break;
+  case 'update':
+    try {
+      var updatedAccount = accountCtrl.update(account.name, account.username, account.password, account.masterPassword);
+
+      if (updatedAccount === null) {
+        utils.error('Account not found!');
+      } else {
+        utils.account(updatedAccount);
+      }
+    } catch(e) {
+      utils.error('Unable to update account!');
+    }
+
+    break;
   default:
     utils.header();
 }
