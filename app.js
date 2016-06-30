@@ -1,5 +1,8 @@
 'use strict';
 
+// Dependencies
+var utils = require('./utils/formatting.js');
+
 // Model
 var account = require('./models/account.js');
 
@@ -18,10 +21,9 @@ switch (command) {
         password: account.password
       }, account.masterPassword);
 
-      console.log('New account created!');
-      console.log(newAccount);
+      utils.account(newAccount);
     } catch(e) {
-      console.log('Unable to create account!');
+      utils.error('Unable to create account!');
     }
 
     break;
@@ -29,15 +31,16 @@ switch (command) {
     try {
       var fetchedAccount = accountCtrl.read(account.name, account.masterPassword);
 
-      if (typeof fetchedAccount === 'undefined') {
-        console.log('Account not found!');
+      if (typeof fetchedAccount === 'null') {
+        utils.error('Account not found!');
       } else {
-        console.log('Account found!');
-        console.log(fetchedAccount);
+        utils.account(fetchedAccount);
       }
     } catch(e) {
-      console.log('Unable to fetch account!');
+      utils.error('Unable to fetch account!');
     }
 
     break;
+  default:
+    utils.header();
 }

@@ -20,7 +20,7 @@ function create(account, masterPassword) {
 
 function read(accountName, masterPassword) {
 	var accounts = storageCtrl.get(masterPassword);
-  var matchedAccount = {};
+  var matchedAccount = null;
 
 	accounts.forEach(function(account) {
 		if (account.name === accountName) {
