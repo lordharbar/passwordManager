@@ -1,7 +1,7 @@
 'use strict';
 
 // Dependencies
-var utils = require('./utils/formatting.js');
+var utils = require('./utils/format.js');
 
 // Model
 var account = require('./models/account.js');
