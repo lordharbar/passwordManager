@@ -21,7 +21,7 @@ switch (command) {
         password: account.password
       }, account.masterPassword);
 
-      utils.account(newAccount);
+      utils.account('New ', newAccount);
     } catch(e) {
       utils.error('Unable to create account!');
     }
@@ -34,7 +34,7 @@ switch (command) {
       if (fetchedAccount === null) {
         utils.error('Account not found!');
       } else {
-        utils.account(fetchedAccount);
+        utils.account('', fetchedAccount);
       }
     } catch(e) {
       utils.error('Unable to fetch account!');
@@ -48,7 +48,7 @@ switch (command) {
       if (updatedAccount === null) {
         utils.error('Account not found!');
       } else {
-        utils.account(updatedAccount);
+        utils.account('Updated ', updatedAccount);
       }
     } catch(e) {
       utils.error('Unable to update account!');
@@ -62,7 +62,7 @@ switch (command) {
       if (deletedAccount === null) {
         utils.error('Account not found!');
       } else {
-        utils.account(deletedAccount);
+        utils.account('Deleted ', deletedAccount);
       }
     } catch(e) {
       utils.error('Unable to delete account!');

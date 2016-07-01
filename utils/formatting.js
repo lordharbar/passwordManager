@@ -20,9 +20,9 @@ function header() {
   );
 }
 
-function account(account) {
+function account(status, account) {
   console.log('/**\n' +
-              '* @Account\n' +
+              '* @' + status + 'Account\n' +
               '*\n' +
               '* Name: ' + account.name + '\n' +
               '* Username: ' + account.username + '\n' +
