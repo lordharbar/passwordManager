@@ -49,8 +49,26 @@ function update(accountName, accountUsername, accountPassword, masterPassword) {
 	return updatedAccount;
 }
 
+function remove(accountName, masterPassword) {
+	var accounts = storageCtrl.get(masterPassword);
+	var deletedAccount = null;
+
+	accounts.forEach(function(account, index) {
+		if (account.name === accountName) {
+			accounts.splice(index, 1);
+
+			storageCtrl.set(accounts, masterPassword);
+
+			deletedAccount = account;
+		}
+	});
+
+	return deletedAccount;
+}
+
 module.exports = {
 	create: create,
 	read: read,
-	update: update
+	update: update,
+	delete: remove
 };

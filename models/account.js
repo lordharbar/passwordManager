@@ -75,6 +75,22 @@ yargs.command('create', 'Create a new account', function(yargs) {
 			}
 		}).help('help');
 	})
+	.command('delete', 'Delete an existing account', function(yargs) {
+		return yargs.options({
+			name: {
+				demand: true,
+				alias: 'n',
+				describe: 'Account name (eg: Google, Github)',
+				type: 'string'
+			},
+			masterPassword: {
+				demand: true,
+				alias: 'm',
+				describe: 'Master password',
+				type: 'string'
+			}
+		}).help('help');
+	})
 	.help('help')
 	.argv;
 

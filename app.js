@@ -55,6 +55,20 @@ switch (command) {
     }
 
     break;
+  case 'delete':
+    try {
+      var deletedAccount = accountCtrl.delete(account.name, account.masterPassword);
+
+      if (deletedAccount === null) {
+        utils.error('Account not found!');
+      } else {
+        utils.account(deletedAccount);
+      }
+    } catch(e) {
+      utils.error('Unable to delete account!');
+    }
+
+    break;
   default:
     utils.header();
 }
