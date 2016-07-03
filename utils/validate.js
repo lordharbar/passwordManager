@@ -3,13 +3,10 @@
 // Dependencies
 var format = require('./format.js');
 
-// Model
-var account = require('../models/account.js');
-
 // Controller
 var accountCtrl = require('../controllers/accountCtrl.js');
 
-function validate(command, silent) {
+function validate(command, account, silent) {
   switch (command) {
     case 'create':
       try {
