@@ -10,4 +10,4 @@ var account = require('./models/account.js');
 var command = account._[0];
 
 // Validation
-validate(command);
+validate(command, false);

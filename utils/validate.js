@@ -1,7 +1,7 @@
 'use strict';
 
 // Dependencies
-var utils = require('./format.js');
+var format = require('./format.js');
 
 // Model
 var account = require('../models/account.js');
@@ -9,7 +9,7 @@ var account = require('../models/account.js');
 // Controller
 var accountCtrl = require('../controllers/accountCtrl.js');
 
-function validate(command) {
+function validate(command, silent) {
   switch (command) {
     case 'create':
       try {
@@ -19,9 +19,9 @@ function validate(command) {
           password: account.password
         }, account.masterPassword);
 
-        utils.account('New ', newAccount);
+        if (!silent) format.account('New ', newAccount);
       } catch(e) {
-        utils.error('Unable to create account!');
+        if (!silent) format.error('Unable to create account!');
       }
 
       break;
@@ -30,12 +30,12 @@ function validate(command) {
         var fetchedAccount = accountCtrl.read(account.name, account.masterPassword);
 
         if (fetchedAccount === null) {
-          utils.error('Account not found!');
+          if (!silent) format.error('Account not found!');
         } else {
-          utils.account('', fetchedAccount);
+          if (!silent) format.account('', fetchedAccount);
         }
       } catch(e) {
-        utils.error('Unable to fetch account!');
+        if (!silent) format.error('Unable to fetch account!');
       }
 
       break;
@@ -44,12 +44,12 @@ function validate(command) {
         var updatedAccount = accountCtrl.update(account.name, account.username, account.password, account.masterPassword);
 
         if (updatedAccount === null) {
-          utils.error('Account not found!');
+          if (!silent) format.error('Account not found!');
         } else {
-          utils.account('Updated ', updatedAccount);
+          if (!silent) format.account('Updated ', updatedAccount);
         }
       } catch(e) {
-        utils.error('Unable to update account!');
+        if (!silent) format.error('Unable to update account!');
       }
 
       break;
@@ -58,17 +58,17 @@ function validate(command) {
         var deletedAccount = accountCtrl.delete(account.name, account.masterPassword);
 
         if (deletedAccount === null) {
-          utils.error('Account not found!');
+          if (!silent) format.error('Account not found!');
         } else {
-          utils.account('Deleted ', deletedAccount);
+          if (!silent) format.account('Deleted ', deletedAccount);
         }
       } catch(e) {
-        utils.error('Unable to delete account!');
+        if (!silent) format.error('Unable to delete account!');
       }
 
       break;
     default:
-      utils.header();
+      if (!silent) format.header();
   }
 }
 
