@@ -3,23 +3,26 @@
 // Controller
 var storageCtrl = require('./storageCtrl.js');
 
+// Filename for node-persist
+var filename = 'accounts';
+
 // Account example
 // account.name = Github
 // account.username = philippschulte
 // account.password = thisIsMySecret
 
 function create(account, masterPassword) {
-	var accounts = storageCtrl.get(masterPassword);
+	var accounts = storageCtrl.get(masterPassword, filename);
 
 	accounts.push(account);
 
-	storageCtrl.set(accounts, masterPassword);
+	storageCtrl.set(accounts, masterPassword, filename);
 
 	return account;
 }
 
 function read(accountName, masterPassword) {
-	var accounts = storageCtrl.get(masterPassword);
+	var accounts = storageCtrl.get(masterPassword, filename);
   var matchedAccount = null;
 
 	accounts.forEach(function(account) {
@@ -32,7 +35,7 @@ function read(accountName, masterPassword) {
 }
 
 function update(accountName, accountUsername, accountPassword, masterPassword) {
-	var accounts = storageCtrl.get(masterPassword);
+	var accounts = storageCtrl.get(masterPassword, filename);
 	var updatedAccount = null;
 
 	accounts.forEach(function(account) {
@@ -40,7 +43,7 @@ function update(accountName, accountUsername, accountPassword, masterPassword) {
 			account.username = accountUsername;
 			account.password = accountPassword;
 
-			storageCtrl.set(accounts, masterPassword);
+			storageCtrl.set(accounts, masterPassword, filename);
 
 			updatedAccount = account;
 		}
@@ -50,14 +53,14 @@ function update(accountName, accountUsername, accountPassword, masterPassword) {
 }
 
 function remove(accountName, masterPassword) {
-	var accounts = storageCtrl.get(masterPassword);
+	var accounts = storageCtrl.get(masterPassword, filename);
 	var deletedAccount = null;
 
 	accounts.forEach(function(account, index) {
 		if (account.name === accountName) {
 			accounts.splice(index, 1);
 
-			storageCtrl.set(accounts, masterPassword);
+			storageCtrl.set(accounts, masterPassword, filename);
 
 			deletedAccount = account;
 		}

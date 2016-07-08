@@ -7,8 +7,8 @@ var cryptoJS = require('crypto-js');
 // Create instance of storage
 storage.initSync();
 
-function get(masterPassword) {
-  var encryptedAccounts = storage.getItemSync('accounts');
+function get(masterPassword, filename) {
+  var encryptedAccounts = storage.getItemSync(filename);
   var accounts = [];
 
   if (typeof encryptedAccounts !== 'undefined') {
@@ -19,10 +19,10 @@ function get(masterPassword) {
   return accounts;
 }
 
-function set(accounts, masterPassword) {
+function set(accounts, masterPassword, filename) {
   var encryptedAccounts = cryptoJS.AES.encrypt(JSON.stringify(accounts), masterPassword);
 
-  storage.setItemSync('accounts', encryptedAccounts.toString());
+  storage.setItemSync(filename, encryptedAccounts.toString());
 }
 
 module.exports = {
