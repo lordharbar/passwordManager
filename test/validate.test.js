@@ -14,32 +14,28 @@ describe('validate', function() {
   };
 
   describe('#create', function() {
-    var create = sinon.spy(accountCtrl, 'create');
-
     afterEach(function() {
       accountCtrl.delete(account.name, account.masterPassword);
     });
 
-    it('should call accountCtrl.create once', function() {
+    it('should call accountCtrl.create once', sinon.test(function() {
+      var create = this.spy(accountCtrl, 'create');
       validate('create', account, true);
-      create.restore();
       sinon.assert.calledOnce(create);
-    });
+    }));
 
-    it('should call accountCtrl.create with all account props and master password', function() {
+    it('should call accountCtrl.create with all account props and master password', sinon.test(function() {
+      var create = this.spy(accountCtrl, 'create');
       validate('create', account, true);
-      create.restore();
       create.calledWith({
         name: account.name,
         username: account.username,
         password: account.password
       }, account.masterPassword);
-    });
+    }));
   });
 
   describe('#read', function() {
-    var read = sinon.spy(accountCtrl, 'read');
-
     before(function() {
       accountCtrl.create({
         name: account.name,
@@ -52,22 +48,20 @@ describe('validate', function() {
       accountCtrl.delete(account.name, account.masterPassword);
     });
 
-    it('should call accountCtrl.read once', function() {
+    it('should call accountCtrl.read once', sinon.test(function() {
+      var read = this.spy(accountCtrl, 'read');
       validate('read', account, true);
-      read.restore();
       sinon.assert.calledOnce(read);
-    });
+    }));
 
-    it('should call accountCtrl.read with account name and master password', function() {
+    it('should call accountCtrl.read with account name and master password', sinon.test(function() {
+      var read = this.spy(accountCtrl, 'read');
       validate('read', account, true);
-      read.restore();
       read.calledWith(account.name, account.masterPassword);
-    });
+    }));
   });
 
   describe('#update', function() {
-    var update = sinon.spy(accountCtrl, 'update');
-
     before(function() {
       accountCtrl.create({
         name: account.name,
@@ -80,22 +74,20 @@ describe('validate', function() {
       accountCtrl.delete(account.name, account.masterPassword);
     });
 
-    it('should call accountCtrl.update once', function() {
+    it('should call accountCtrl.update once', sinon.test(function() {
+      var update = this.spy(accountCtrl, 'update');
       validate('update', account, true);
-      update.restore();
       sinon.assert.calledOnce(update);
-    });
+    }));
 
-    it('should call accountCtrl.update with all account props and master password', function() {
+    it('should call accountCtrl.update with all account props and master password', sinon.test(function() {
+      var update = this.spy(accountCtrl, 'update');
       validate('update', account, true);
-      update.restore();
       update.calledWith(account.name, account.username, account.password, account.masterPassword);
-    });
+    }));
   });
 
   describe('#delete', function() {
-    var destroy = sinon.spy(accountCtrl, 'delete');
-
     beforeEach(function() {
       accountCtrl.create({
         name: account.name,
@@ -104,17 +96,17 @@ describe('validate', function() {
       }, account.masterPassword);
     });
 
-    it('should call accountCtrl.delete once', function() {
+    it('should call accountCtrl.delete once', sinon.test(function() {
+      var destroy = this.spy(accountCtrl, 'delete');
       validate('delete', account, true);
-      destroy.restore();
       sinon.assert.calledOnce(destroy);
-    });
+    }));
 
-    it('should call accountCtrl.delete with account name and master password', function() {
+    it('should call accountCtrl.delete with account name and master password', sinon.test(function() {
+      var destroy = this.spy(accountCtrl, 'delete');
       validate('delete', account, true);
-      destroy.restore();
       destroy.calledWith(account.name, account.masterPassword);
-    });
+    }));
   });
 
 });
