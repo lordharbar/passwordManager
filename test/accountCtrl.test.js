@@ -4,6 +4,7 @@
 var chai = require('chai');
 var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
+var config = require('../config.js');
 var accountCtrl = require('../controllers/accountCtrl.js');
 var storageCtrl = require('../controllers/storageCtrl.js');
 
@@ -12,12 +13,7 @@ chai.should();
 chai.use(sinonChai);
 
 describe('accountCtrl', function() {
-  var account = {
-    name: 'twitter',
-    username: '@phillies',
-    password: 'tweet123',
-    masterPassword: 'master123'
-  };
+  var account = config.test.account;
 
   describe('#create', function() {
     afterEach(function() {
@@ -45,7 +41,8 @@ describe('accountCtrl', function() {
     it('should call storageCtrl.set with all accounts and with the master password', sinon.test(function() {
       var set = this.spy(storageCtrl, 'set');
       accountCtrl.create({name: account.name, username: account.username, password: account.password}, account.masterPassword);
-      set.should.have.been.calledWithExactly([{name: account.name, username: account.username, password: account.password}], account.masterPassword);
+      var allAccounts = storageCtrl.get(account.masterPassword);
+      set.should.have.been.calledWithExactly(allAccounts, account.masterPassword);
     }));
 
     it('should return the new account', sinon.test(function() {
@@ -100,25 +97,25 @@ describe('accountCtrl', function() {
 
     it('should call storageCtrl.get once', sinon.test(function() {
       var get = this.spy(storageCtrl, 'get');
-      accountCtrl.update(account.name, '@philippschulte', 'tweets123', account.masterPassword);
+      accountCtrl.update(account.name, 'foofoo', 'barbar', account.masterPassword);
       get.should.have.been.calledOnce;
     }));
 
     it('should call storageCtrl.get with the master password', sinon.test(function() {
       var get = this.spy(storageCtrl, 'get');
-      accountCtrl.update(account.name, '@philippschulte', 'tweets123', account.masterPassword);
+      accountCtrl.update(account.name, 'foofoo', 'barbar', account.masterPassword);
       get.should.have.been.calledWithExactly(account.masterPassword);
     }));
 
     it('should return the updated account if it exists', sinon.test(function() {
       var update = this.spy(accountCtrl, 'update');
-      accountCtrl.update(account.name, '@philippschulte', 'tweets123', account.masterPassword);
-      update.should.have.returned({name: account.name, username: '@philippschulte', password: 'tweets123'});
+      accountCtrl.update(account.name, 'foofoo', 'barbar', account.masterPassword);
+      update.should.have.returned({name: account.name, username: 'foofoo', password: 'barbar'});
     }));
 
     it('should return null if the account does not exist', sinon.test(function() {
       var update = this.spy(accountCtrl, 'update');
-      accountCtrl.update('facebook', 'Philipp Schulte', 'facebook123', account.masterPassword);
+      accountCtrl.update('betterThanAwesome', 'foo', 'bar', account.masterPassword);
       update.should.have.returned(null);
     }));
   });
