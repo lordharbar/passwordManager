@@ -1,9 +1,15 @@
 'use strict';
 
 // Dependencies
+var chai = require('chai');
 var sinon = require('sinon');
+var sinonChai = require('sinon-chai');
 var validate = require('../utils/validate.js');
 var accountCtrl = require('../controllers/accountCtrl.js');
+
+// Chai setup
+chai.should();
+chai.use(sinonChai);
 
 describe('validate', function() {
   var account = {
@@ -21,13 +27,13 @@ describe('validate', function() {
     it('should call accountCtrl.create once', sinon.test(function() {
       var create = this.spy(accountCtrl, 'create');
       validate('create', account, true);
-      sinon.assert.calledOnce(create);
+      create.should.have.been.calledOnce;
     }));
 
     it('should call accountCtrl.create with all account props and master password', sinon.test(function() {
       var create = this.spy(accountCtrl, 'create');
       validate('create', account, true);
-      create.calledWith({
+      create.should.have.been.calledWithExactly({
         name: account.name,
         username: account.username,
         password: account.password
@@ -51,13 +57,13 @@ describe('validate', function() {
     it('should call accountCtrl.read once', sinon.test(function() {
       var read = this.spy(accountCtrl, 'read');
       validate('read', account, true);
-      sinon.assert.calledOnce(read);
+      read.should.have.been.calledOnce;
     }));
 
     it('should call accountCtrl.read with account name and master password', sinon.test(function() {
       var read = this.spy(accountCtrl, 'read');
       validate('read', account, true);
-      read.calledWith(account.name, account.masterPassword);
+      read.should.have.been.calledWithExactly(account.name, account.masterPassword);
     }));
   });
 
@@ -77,13 +83,13 @@ describe('validate', function() {
     it('should call accountCtrl.update once', sinon.test(function() {
       var update = this.spy(accountCtrl, 'update');
       validate('update', account, true);
-      sinon.assert.calledOnce(update);
+      update.should.have.been.calledOnce;
     }));
 
     it('should call accountCtrl.update with all account props and master password', sinon.test(function() {
       var update = this.spy(accountCtrl, 'update');
       validate('update', account, true);
-      update.calledWith(account.name, account.username, account.password, account.masterPassword);
+      update.should.have.been.calledWithExactly(account.name, account.username, account.password, account.masterPassword);
     }));
   });
 
@@ -99,13 +105,13 @@ describe('validate', function() {
     it('should call accountCtrl.delete once', sinon.test(function() {
       var destroy = this.spy(accountCtrl, 'delete');
       validate('delete', account, true);
-      sinon.assert.calledOnce(destroy);
+      destroy.should.have.been.calledOnce;
     }));
 
     it('should call accountCtrl.delete with account name and master password', sinon.test(function() {
       var destroy = this.spy(accountCtrl, 'delete');
       validate('delete', account, true);
-      destroy.calledWith(account.name, account.masterPassword);
+      destroy.should.have.been.calledWithExactly(account.name, account.masterPassword);
     }));
   });
 
