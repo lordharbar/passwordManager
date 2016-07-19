@@ -22,7 +22,7 @@ and run the following command to install all dependencies:
 $ npm install
 ```
 
-## Commands
+## Usage
 
 The API provides the basic `CRUD` functionality like:
 
@@ -51,3 +51,32 @@ The API provides the basic `CRUD` functionality like:
 | 		       | --masterPassword | -u	  | String | true     | Master password           |
 
 ## Examples
+
+## Tests
+
+To run the test suite, first install the dependencies,
+
+```
+$ npm install
+```
+
+then run npm test:
+
+```
+$ npm test
+```
+
+**Important**: If you already added accounts and setup a `master password`, then you have to update the `masterPassword` property in the `config.js` file. Otherwise the tests will fail! 
+
+```javascript
+module.exports = {
+  test: {
+    account: {
+      name: 'awesome',
+      username: 'foo',
+      password: 'bar',
+      masterPassword: 'yourMasterPassword'
+    }
+  }
+};
+```
