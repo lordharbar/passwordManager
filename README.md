@@ -1,6 +1,6 @@
 # Password Manager
 
-Because I am using the `Terminal` every day for work, I thought it would be great to have a simple `Command-Line` app to persist the credentials of all my accounts.
+I needed a simple app to store all my account information secure on my local machine. There was no need for a fancy interface design. I run so many commands in the terminal everyday so why not also handle all my account information from the command line as well! 
 
 ## Installation
 
@@ -54,7 +54,7 @@ The API provides the basic `CRUD` functionality like:
 
 ## Examples
 
-Lets create, read, update, and delete a account. Open the `command line` and change directory to the root of the project.
+Lets create, read, update, and delete an account. Open the `command line` and change directory to the root of the project.
 
 ### Command: create
 
@@ -63,6 +63,8 @@ Lets create, read, update, and delete a account. Open the `command line` and cha
 ```
 $ node pm create --help
 ```
+
+`create`:
 
 ```
 $ node pm create -n GitHub -u johndoe -p password123 -m master123
@@ -88,6 +90,8 @@ $ node pm create -n GitHub -u johndoe -p password123 -m master123
 $ node pm read --help
 ```
 
+`read`:
+
 ```
 $ node pm read -n GitHub -m master123
 ```
@@ -112,6 +116,8 @@ $ node pm read -n GitHub -m master123
 $ node pm update --help
 ```
 
+`update`:
+
 ```
 $ node pm update -n GitHub -u john.doe@gmail.com -p newPassword -m master123
 ```
@@ -135,6 +141,8 @@ $ node pm update -n GitHub -u john.doe@gmail.com -p newPassword -m master123
 ```
 $ node pm delete --help
 ```
+
+`delete`:
 
 ```
 $ node pm delete -n GitHub -m master123
